@@ -25,8 +25,8 @@
     <script>
         // Recupere as informações dos times do localStorage
         const equipes = JSON.parse(localStorage.getItem("equipes")) || { equipe1: [], equipe2: [] };
-        const equipe1List = document.getElementById("equipe1-list");
-        const equipe2List = document.getElementById("equipe2-list");
+        const equipe1List = document.getElementById("equipe1");
+        const equipe2List = document.getElementById("equipe2");
 
         // Exiba os nomes das equipes nas listas
         equipes.equipe1.forEach(function (nome) {
