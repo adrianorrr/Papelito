@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelito</title>
+    <link rel="stylesheet" href="02papelito.css" />
+</head>
+<body>
+    <h1>EL PAPELITO</h1>
+    <p class="sub">O inimigo agora é exatamente o mesmo, só que online</p>
+    <form id="meuForm" method="POST">
+        <fieldset>
+            <legend>Equipes</legend>
+            <label><input id="definir" type="radio" name="equipes" value="definir"> Definir</label><br><br>
+            <label><input id="sortear" type="radio" name="equipes" value="sortear"> Sortear</label>
+        </fieldset>
+        <br>
+        <button type="submit">Blz</button>
+    </form>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var meuForm = document.getElementById("meuForm");
+        
+            meuForm.addEventListener("submit", function(event) {
+                var destinoSelecionado = document.querySelector('input[name="equipes"]:checked').value;
+                
+                if (destinoSelecionado === "definir") {
+                    meuForm.action = "03definir.html";
+                } else if (destinoSelecionado === "sortear") {
+                    meuForm.action = "05sortear.html";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
