@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelito</title>
+    <link rel="stylesheet" href="04definir.css" />
+</head>
+<body>
+    <h1>EL PAPELITO</h1>
+    <p class="sub">O inimigo agora é exatamente o mesmo, só que online</p>
+    <div class="borda"></div>
+    <h2>Sortear equipes</h2>
+    <div class="borda"></div>
+    <form id="nome-form1">
+        <fieldset>
+            <input type="text" id="nome-input1" placeholder="Digite um nome" />
+            <button type="button" class="salvar-button">Salvar</button>
+            <ol id="nomes-list1" class="nomes-list"></ol>
+        </fieldset>
+        <br>
+        <button type="button" class="sortear-button">Sortear</button>
+    </form>
+
+    <div class="coluna">
+        <div id="equipe1" class="equipe">
+            <h3>Equipe 1</h3>
+        </div>
+        <div id="equipe2" class="equipe">
+            <h3>Equipe 2</h3>
+        </div>
+    </div>
+
+    <button type="button" id="jogar-button" class="jogar-button" style="display: none;">Jogar</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nomeInput = document.getElementById("nome-input1");
+            const salvarButton = document.querySelector(".salvar-button");
+            const nomesList = document.getElementById("nomes-list1");
+            const sortearButton = document.querySelector(".sortear-button");
+            const equipe1 = document.getElementById("equipe1");
+            const equipe2 = document.getElementById("equipe2");
+            const jogarButton = document.getElementById("jogar-button");
+            const nomeForm = document.getElementById("nome-form1");
+
+            const nomes = [];
+
+            salvarButton.addEventListener("click", function () {
+                const nome = nomeInput.value.trim();
+
+                if (nome !== "") {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = nome;
+                    nomesList.appendChild(listItem);
+                    nomes.push(nome);
+                    nomeInput.value = "";
+                }
+            });
+
+            sortearButton.addEventListener("click", function () {
+                const shuffledNomes = shuffleArray(nomes);
+                const meio = Math.ceil(shuffledNomes.length / 2);
+                const equipe1Nomes = shuffledNomes.slice(0, meio);
+                const equipe2Nomes = shuffledNomes.slice(meio);
+
+                equipe1.innerHTML = `<h3>Equipe 1</h3><ul>${equipe1Nomes.map(nome => `<li>${nome}</li>`).join('')}</ul>`;
+                equipe2.innerHTML = `<h3>Equipe 2</h3><ul>${equipe2Nomes.map(nome => `<li>${nome}</li>`).join('')}</ul>`;
+
+                // Exibe as equipes após o sorteio
+                equipe1.style.display = "block";
+                equipe2.style.display = "block";
+
+                // Exibe o botão "Jogar"
+                jogarButton.style.display = "block";
+
+                // Oculta o formulário e o botão "Sortear"
+                nomeForm.style.display = "none";
+                sortearButton.style.display = "none";
+
+                // Salvar as equipes no localStorage
+                localStorage.setItem("equipes", JSON.stringify({
+                    equipe1: equipe1Nomes,
+                    equipe2: equipe2Nomes
+                }));
+            });
+
+            jogarButton.addEventListener("click", function () {
+                // Redireciona para a próxima página (substitua 'pagina_proxima.html' pelo URL desejado)
+                window.location.href = '06jogar.html';
+            });
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+        });
+    </script>
+</body>
+</html>

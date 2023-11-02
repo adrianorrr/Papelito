@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Jogo</title>
+    <link rel="stylesheet" href="04definir.css" />
+</head>
+<body>
+    <h1>EL PAPELITO</h1>
+    <p class="sub">O inimigo agora é exatamente o mesmo, só que online</p>
+    <div class="borda"></div>
+    <h2>Informações das Equipes</h2>
+    
+    <div id="equipe1" class="equipe">
+        <h3>Equipe 1</h3>
+        <ul id="equipe1-list" class="nomes-list"></ul>
+    </div>
+    
+    <div id="equipe2" class="equipe">
+        <h3>Equipe 2</h3>
+        <ul id="equipe2-list" class="nomes-list"></ul>
+    </div>
+
+    <script>
+        // Recupere as informações dos times do localStorage
+        const equipes = JSON.parse(localStorage.getItem("equipes")) || { equipe1: [], equipe2: [] };
+        const equipe1List = document.getElementById("equipe1-list");
+        const equipe2List = document.getElementById("equipe2-list");
+
+        // Exiba os nomes das equipes nas listas
+        equipes.equipe1.forEach(function (nome) {
+            const listItem = document.createElement("li");
+            listItem.textContent = nome;
+            equipe1List.appendChild(listItem);
+        });
+
+        equipes.equipe2.forEach(function (nome) {
+            const listItem = document.createElement("li");
+            listItem.textContent = nome;
+            equipe2List.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>

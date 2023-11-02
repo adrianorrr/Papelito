@@ -1,0 +1,34 @@
+
+body {
+    font-size: 28px;
+  }
+  
+h1 {
+font-size: 44px;
+display: flex;
+justify-content: center;
+background-color: rgb(74, 74, 74);
+color: whitesmoke;
+}
+  
+.sub {
+font-size: 16px;
+display: flex;
+justify-content: center;
+margin: -25px 0 45px 0;
+}
+
+#definir {
+margin-top: 25px
+}
+
+legend {
+text-align: center; /* Centraliza o texto da legenda */
+}
+
+button {
+    margin: 0 auto;
+    display: block;
+    padding: 0 0.5rem;
+    font-size: 24px;
+}

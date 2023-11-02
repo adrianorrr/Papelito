@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelito</title>
+    <link rel="stylesheet" href="04definir.css" />
+</head>
+<body>
+    <h1>EL PAPELITO</h1>
+    <p class="sub">O inimigo agora é exatamente o mesmo, só que online</p>
+    <div class="borda"></div>
+    <h2>Escolher equipes</h2>
+    <div class="borda"></div>
+    <form id="nome-form1">
+        <fieldset>
+            <legend>Equipe 1</legend>
+            <input type="text" id="nome-input1" placeholder="Digite um nome" />
+            <button type="button" class="salvar-button">Salvar</button>
+            <ol id="nomes-list1" class="nomes-list"></ol>
+        </fieldset>
+    </form>
+    <form id="nome-form2">
+        <fieldset>
+            <legend>Equipe 2</legend>
+            <input type="text" id="nome-input2" placeholder="Digite um nome" />
+            <button type="button" class="salvar-button">Salvar</button>
+            <ol id="nomes-list2" class="nomes-list"></ol>
+        </fieldset>
+    </form>
+
+    <script>
+        // Função para adicionar um nome à lista e salvar no localStorage
+        function adicionarNome(inputId, listId) {
+            const nomeInput = document.getElementById(inputId);
+            const nome = nomeInput.value.trim();
+
+            if (nome) {
+                const nomesList = document.getElementById(listId);
+                const novoItem = document.createElement("li");
+                novoItem.textContent = nome;
+                nomesList.appendChild(novoItem);
+                nomeInput.value = ""; // Limpa o campo de entrada
+
+                // Salvar o nome no localStorage
+                const nomesSalvos = JSON.parse(localStorage.getItem("equipes")) || { equipe1: [], equipe2: [] };
+                if (inputId === "nome-input1") {
+                    nomesSalvos.equipe1.push(nome);
+                } else if (inputId === "nome-input2") {
+                    nomesSalvos.equipe2.push(nome);
+                }
+                localStorage.setItem("equipes", JSON.stringify(nomesSalvos));
+            }
+        }
+
+        // Event listener para os botões "Salvar"
+        document.querySelectorAll(".salvar-button").forEach(function (button, index) {
+            const inputId = "nome-input" + (index + 1);
+            const listId = "nomes-list" + (index + 1);
+
+            button.addEventListener("click", function () {
+                adicionarNome(inputId, listId);
+            });
+        });
+    </script>
+
+    <br>
+    <button class="blz" type="button" id="jogar-button">Jogar</button>
+
+    <script>
+        const jogarButton = document.getElementById("jogar-button");
+
+        jogarButton.addEventListener("click", function () {
+            // Redireciona para a página "06jogar.html"
+            window.location.href = '06jogar.html';
+        });
+    </script>
+</body>
+</html>
